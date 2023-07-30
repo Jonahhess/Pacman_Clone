@@ -18,9 +18,11 @@ def main():
     # Desired width and height for Pacman and Ghost sprites
     pacman_width, pacman_height = 30, 30
     ghost_width, ghost_height = 30, 30
+    background_width, background_height = 800,600
 
     pacman_image = pygame.transform.scale(pacman_image, (pacman_width, pacman_height))
     ghost_image = pygame.transform.scale(ghost_image, (ghost_width, ghost_height))
+    background_image = pygame.transform.scale(background_image, (background_width, background_height))
 
     pacman_x, pacman_y = SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2
     ghost_x, ghost_y = SCREEN_WIDTH // 4, SCREEN_HEIGHT // 4
@@ -31,9 +33,10 @@ def main():
     clock = pygame.time.Clock()
 
     while True:
+        screen.blit(background_image, (0, 0))   
         screen.blit(pacman_image, (pacman_x, pacman_y))
         screen.blit(ghost_image, (ghost_x, ghost_y))
-        screen.blit(background_image, (0, 0))   
+
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -59,8 +62,7 @@ def main():
             elif pacman_direction == "RIGHT":
                 pacman_x += pacman_speed
                     
-        # Render the game
-        screen.fill(BACKGROUND_COLOR)
+        
 
         # Draw Pacman, Ghosts, pellets, walls, and other game elements here
         pygame.display.flip()
