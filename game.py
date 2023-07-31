@@ -5,6 +5,7 @@ import block,character,level
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 ELEMENT_WIDTH, ELEMENT_HEIGHT = 30,30
 BACKGROUND_COLOR = (0, 0, 0)
+background_image = pygame.image.load("assets/background.png")
 
 class Game:
     score: int
@@ -46,6 +47,7 @@ class Game:
         
         
         while True:
+            self.screen.blit(background_image, (0, 0))   
             self.draw(pacman)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
