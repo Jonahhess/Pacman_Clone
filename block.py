@@ -1,9 +1,15 @@
 class Block:
+    x_pos: int
+    y_pos: int
+    length: int
     left_wall: bool
     right_wall: bool
     up_wall: bool
     down_wall: bool
     visited: bool
+
+    def __init__(self, length=50):
+        self.length = length
 
     def buildBlock(self):
         finished = False
@@ -53,6 +59,6 @@ class Block:
         elif key_press == "RIGHT":
             return not self.right_wall
         return
-    
+
     def visit(self):
         self.visited = False
