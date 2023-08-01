@@ -8,19 +8,25 @@ class Block:
     down_wall: bool
     visited: bool
 
-    def __init__(self, length=50):
+    def __init__(self, x_pos=0,y_pos=0,length=50,left_wall=0,right_wall=0,up_wall=0,down_wall=0,visited=0):
+        self.x_pos = x_pos
+        self.y_pos = y_pos
         self.length = length
+        self.left_wall = left_wall
+        self.right_wall = right_wall
+        self.up_wall = up_wall
+        self.down_wall = down_wall
+        self.visited = visited
+
 
     def buildBlock(self):
         finished = False
-        user_input = input("To finish press q")
-        if user_input == "q":
-            finished = True
-
-        user_input = input("Build block: use I,J,K,L keys to add/remove walls")
+        print("begin\n")
         while not finished:
-            self.changeBlock(user_input)
             user_input = input()
+            self.changeBlock(user_input)
+            if user_input == 'q':
+                finished = True
         
         return self
 
@@ -39,14 +45,14 @@ class Block:
         return
 
     def changeBlock(self,key_press):
-        if key_press == "UP":
-            up_wall = not up_wall
-        elif key_press == "DOWN":
-            down_wall = not down_wall
-        elif key_press == "LEFT":
-            left_wall = not left_wall
-        elif key_press == "RIGHT":
-            right_wall = not right_wall
+        if key_press == 1:
+            self.up_wall = not self.up_wall
+        elif key_press == 2:
+            self.down_wall = not self.down_wall
+        elif key_press == 3:
+            self.left_wall = not self.left_wall
+        elif key_press == 4:
+            self.right_wall = not self.right_wall
         return
     
     def isLegalMove(self,key_press):
@@ -62,3 +68,6 @@ class Block:
 
     def visit(self):
         self.visited = False
+
+    def toString(self):
+        return str(self.x_pos) + ',' + str(self.y_pos) + ',' + str(self.length) + ',' + str(int(self.left_wall)) + ',' + str(int(self.right_wall)) + ',' + str(int(self.up_wall)) + ',' + str(int(self.down_wall)) + ',' + str(int(self.visited))
