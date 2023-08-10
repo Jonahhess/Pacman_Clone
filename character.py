@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import pygame
+from pygame import Surface,image,transform, K_UP, K_DOWN, K_LEFT, K_RIGHT
 
 class Character:
     x_pos: int
@@ -10,7 +10,7 @@ class Character:
     width: int
     height: int
     name: str
-    image: pygame.Surface
+    image: Surface
 
     def __init__(self,x_pos,y_pos, width=30, height=30):
         self.x_pos = x_pos
@@ -21,8 +21,8 @@ class Character:
 
     def setImage(self):
         address = "assets/" + self.name + '/' + self.name + '_' + self.direction.lower() + ".png"
-        target = pygame.image.load(address)
-        target = pygame.transform.scale(target, (self.width, self.height))   
+        target = image.load(address)
+        target = transform.scale(target, (self.width, self.height))   
         return target
 
     def collision(self,enemy:Character):
@@ -34,19 +34,19 @@ class Character:
         return False
 
     def move(self):
-        if self.direction == "UP":
+        if self.direction == K_UP:
             self.y_pos -= self.speed
-        elif self.direction == "DOWN":
+        elif self.direction == K_DOWN:
             self.y_pos += self.speed
-        elif self.direction == "LEFT":
+        elif self.direction == K_LEFT:
             self.x_pos -= self.speed
-        elif self.direction == "RIGHT":
+        elif self.direction == K_RIGHT:
             self.x_pos += self.speed
 
         return
     
     def chooseDirection(self,key_press):
-        if key_press in ["UP", "DOWN", "LEFT", "RIGHT"] and key_press != self.direction:
+        if key_press in [K_UP, K_DOWN, K_LEFT, K_RIGHT] and key_press != self.direction:
             self.direction = key_press
             return True
         return False
@@ -57,13 +57,13 @@ class Character:
 class Pacman(Character):
     def __init__(self, x_pos, y_pos):
         super().__init__(x_pos, y_pos)
-        self.direction = "RIGHT"
+        self.direction = K_RIGHT
         self.name = "pacman"
         self.image = self.setImage()
 
 class Ghost(Character):
     def __init__(self, x_pos, y_pos,name):
         super().__init__(x_pos, y_pos)
-        self.direction = "UP"
+        self.direction = K_UP
         self.name = name
         self.image = self.setImage()

@@ -1,3 +1,4 @@
+from pygame import draw, K_UP, K_DOWN, K_LEFT, K_RIGHT
 class Block:
     x_pos: int
     y_pos: int
@@ -17,6 +18,16 @@ class Block:
         self.up_wall = up_wall
         self.down_wall = down_wall
         self.visited = visited
+
+    def drawBlock(self,screen):
+        if self.left_wall:
+            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos,self.y_pos + self.length))
+        if self.right_wall:
+            draw.line(self.screen, (0,0,255), (self.x_pos + self.length,self.y_pos), (self.x_pos,self.y_pos + self.length))
+        if self.up_wall:
+            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos  + self.length, self.y_pos))
+        if self.down_wall:
+            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos + self.length), (self.x_pos + self.length ,self.y_pos ))
 
 
     def buildBlock(self):
@@ -45,29 +56,26 @@ class Block:
         return
 
     def changeBlock(self,key_press):
-        if key_press == 1:
+        if key_press == K_UP:
             self.up_wall = not self.up_wall
-        elif key_press == 2:
+        elif key_press == K_DOWN:
             self.down_wall = not self.down_wall
-        elif key_press == 3:
+        elif key_press == K_LEFT:
             self.left_wall = not self.left_wall
-        elif key_press == 4:
+        elif key_press == K_RIGHT:
             self.right_wall = not self.right_wall
         return
     
     def isLegalMove(self,key_press):
-        if key_press == "UP":
+        if key_press == K_UP:
             return not self.up_wall
-        elif key_press == "DOWN":
+        elif key_press == K_DOWN:
             return not self.down_wall
-        elif key_press == "LEFT":
+        elif key_press == K_LEFT:
             return not self.left_wall
-        elif key_press == "RIGHT":
+        elif key_press == K_RIGHT:
             return not self.right_wall
         return
-
-    def visit(self):
-        self.visited = False
 
     def toString(self):
         return str(self.x_pos) + ',' + str(self.y_pos) + ',' + str(self.length) + ',' + str(int(self.left_wall)) + ',' + str(int(self.right_wall)) + ',' + str(int(self.up_wall)) + ',' + str(int(self.down_wall)) + ',' + str(int(self.visited))
