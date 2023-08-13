@@ -18,6 +18,7 @@ class Screen:
     def draw(self,characters:character.Character):
         for c in characters:
             self.screen.blit(c.image,c.getLocation())
+            self.update()
 
     def display_message(self, message, color=(255, 255, 255)):
         # Render the message on the screen

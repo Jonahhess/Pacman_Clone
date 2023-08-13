@@ -21,25 +21,13 @@ class Block:
 
     def drawBlock(self,screen):
         if self.left_wall:
-            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos,self.y_pos + self.length))
+            draw.line(screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos,self.y_pos + self.length))
         if self.right_wall:
-            draw.line(self.screen, (0,0,255), (self.x_pos + self.length,self.y_pos), (self.x_pos,self.y_pos + self.length))
+            draw.line(screen, (0,0,255), (self.x_pos + self.length,self.y_pos), (self.x_pos,self.y_pos + self.length))
         if self.up_wall:
-            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos  + self.length, self.y_pos))
+            draw.line(screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos  + self.length, self.y_pos))
         if self.down_wall:
-            draw.line(self.screen, (0,0,255), (self.x_pos,self.y_pos + self.length), (self.x_pos + self.length ,self.y_pos ))
-
-
-    def buildBlock(self):
-        finished = False
-        print("begin\n")
-        while not finished:
-            user_input = input()
-            self.changeBlock(user_input)
-            if user_input == 'q':
-                finished = True
-        
-        return self
+            draw.line(screen, (0,0,255), (self.x_pos,self.y_pos + self.length), (self.x_pos + self.length ,self.y_pos ))
 
     def exportBlock(self,output_file):
         with open(output_file, 'w') as writer:

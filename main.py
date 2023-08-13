@@ -1,12 +1,7 @@
 import game
-import level
-import block
 
 def main():
-    lev = level.Level(3,3)
-    blo = block.Block()
-    blo.buildBlock()
-    print(blo.toString())
+    level_builer = game(mode=1)
 
 if __name__ == "__main__":
     main()

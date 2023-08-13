@@ -1,5 +1,5 @@
 from pygame import *
-import block,character,level,screen,sys
+import character,level,screen,sys
 
 # Constants for the game window size and colors
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
@@ -13,11 +13,14 @@ class Game:
     characters: list[character.Character]
     game_screen: screen
 
-    def __init__(self) -> None:
+    def __init__(self,mode=0) -> None:
         init()
         self.game_screen = screen.Screen(self,SCREEN_WIDTH,SCREEN_HEIGHT)
         self.game_screen.display_message("Welcome to my game!")
-        self.play()
+        if mode == 0:
+            self.play()
+        elif mode == 1:
+            self.build_level()
 
     def play(self):
         clock = time.Clock()
@@ -47,3 +50,5 @@ class Game:
                 self.game_screen.update()
                 self.game_screen.draw(self.characters)
 
+    def build_level(self):
+        new_level = level(self.game_screen,new_level=True)
