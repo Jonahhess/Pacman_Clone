@@ -55,6 +55,7 @@ class Character:
     def chooseDirection(self,key_press) -> bool:
         if key_press in [K_UP, K_DOWN, K_LEFT, K_RIGHT] and key_press != self.direction:
             self.direction = key_press
+            self.image = self.setImage()
             return True
         return False
     
