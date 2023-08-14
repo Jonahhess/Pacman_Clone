@@ -1,6 +1,6 @@
-import time,json
+import json
 from block import Block
-from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, KEYDOWN, QUIT
+from pygame import event, K_UP, K_DOWN, K_LEFT, K_RIGHT, KEYDOWN, QUIT, time
 import screen
 
 class Level:
@@ -10,7 +10,7 @@ class Level:
     blocks: list
     game_screen: screen
 
-    def __init__(self, game, width=4, height=8,new_level = False):
+    def __init__(self, width=4, height=8,new_level = False):
         if new_level == False:
             self.width = width
             self.height = height
@@ -19,6 +19,7 @@ class Level:
             self.createNewLevel()
 
     def createNewLevel(self):
+        self.high_score = 0
         while True:
             try:
                 width = int(input("Enter width: "))       
@@ -31,7 +32,7 @@ class Level:
         
         while True:
             try:
-                height = int(input("Enter width: "))       
+                height = int(input("Enter height: "))       
             except ValueError:
                 print("Not an integer!")
                 continue
@@ -48,13 +49,13 @@ class Level:
         cur_block = self.blocks[0]
         
         while i < len(self.blocks): 
-            for event in event.get():
-                if event.type == QUIT:
+            for ev in event.get():
+                if ev.type == QUIT:
                     quit()
-                elif event.type == KEYDOWN:
-                    if event.key == K_UP or K_DOWN or K_LEFT or K_RIGHT:
-                        cur_block.changeBlock(event.key)
-                    elif event.key == "n":
+                elif ev.type == KEYDOWN:
+                    if ev.key == K_UP or K_DOWN or K_LEFT or K_RIGHT:
+                        cur_block.changeBlock(ev.key)
+                    elif ev.key == "n":
                         cur_block.drawBlock(self.game_screen)
                         self.game_screen.update()
                         i = i + 1
