@@ -1,7 +1,7 @@
 import game
 
 def main():
-    level_builer = game(mode=1)
+    game.Game(mode=0)
 
 if __name__ == "__main__":
     main()
