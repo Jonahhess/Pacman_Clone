@@ -9,7 +9,7 @@ class Block:
     down_wall: bool
     visited: bool
 
-    def __init__(self, x_pos=0,y_pos=0,length=50,left_wall=0,right_wall=0,up_wall=0,down_wall=0,visited=0):
+    def __init__(self, x_pos=0,y_pos=0,length=250,left_wall=False,right_wall=False,up_wall=False,down_wall=False,visited=False):
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.length = length
@@ -27,7 +27,7 @@ class Block:
         if self.up_wall:
             draw.line(screen, (0,0,255), (self.x_pos,self.y_pos), (self.x_pos  + self.length, self.y_pos))
         if self.down_wall:
-            draw.line(screen, (0,0,255), (self.x_pos,self.y_pos + self.length), (self.x_pos + self.length ,self.y_pos ))
+            draw.line(screen, (0,255,255), (self.x_pos,self.y_pos + self.length), (self.x_pos + self.length ,self.y_pos ))
 
     def exportBlock(self,output_file):
         with open(output_file, 'w') as writer:

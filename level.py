@@ -34,7 +34,6 @@ class Level:
             else:
                 self.height = height
                 break
-        
         self.blocks = [[block.Block() for _ in range(self.width)] for _ in range(self.height)]
         return self
 

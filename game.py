@@ -24,7 +24,7 @@ class Game:
         if mode == 0:
             self.play(mode)
         elif mode == 1:
-            self.cur_level = self.cur_level.createNewLevel()
+            self.cur_level = level.Level()
             self.play(mode)
 
     def play(self,mode=0):
@@ -37,12 +37,12 @@ class Game:
                 while editing_block:
                     for ev in event.get():
                         if ev.type == KEYDOWN:
-                            if ev.key == K_UP or K_DOWN or K_LEFT or K_RIGHT:
+                            if ev.key == 13:
+                                editing_block = False
+                            if ev.key == (K_UP or K_DOWN or K_LEFT or K_RIGHT):
                                 item.changeBlock(ev.key)
                                 item.drawBlock(self.game_screen.screen)
-                            elif ev.key == K_RETURN:
-                                editing_block = False
-                                self.game_screen.update()
+                    self.game_screen.update()
         else:
             self.characters = [character.Pacman(PACMAN_POS)]
             self.characters += [character.Ghost(GHOST_POS,name) for name in ("red","orange","blue","pink")]

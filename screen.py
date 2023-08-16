@@ -34,4 +34,3 @@ class Screen:
         
     def update(self):
         display.flip()
-        display.update()
